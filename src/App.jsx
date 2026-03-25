@@ -299,8 +299,31 @@ export default function App() {
     </div>
   );
 
-  return (
+return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-emerald-500 selection:text-white">
+      
+      {/* 🌟 NEW FIXED HEADER */}
+     <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-emerald-100/80 via-white/90 to-sky-100/80 backdrop-blur-md border-b border-white/50 shadow-sm transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          {/* Logo / Title */}
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <div className="bg-emerald-500/10 p-2 rounded-xl">
+              <Code2 size={24} className="text-emerald-500" />
+            </div>
+            <span className="text-2xl font-black tracking-tighter text-emerald-500 uppercase">
+              Portfolio</span>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8 font-bold text-sm text-slate-600">
+            <a href="#software" className="hover:text-emerald-500 transition-colors">Software</a>
+            <a href="#hardware" className="hover:text-emerald-500 transition-colors">Hardware & IoT</a>
+            <a href="#contact" className="bg-emerald-50 border border-emerald-200 text-emerald-600 px-5 py-2.5 rounded-full hover:bg-emerald-500 hover:text-white transition-all shadow-sm">
+              Let's Talk
+            </a>
+          </nav>
+        </div>
+      </header>
       
       {/* 🚀 IMAGE-MATCHED DASHBOARD HERO */}
       <section className="max-w-7xl mx-auto px-6 pt-24 pb-12">
@@ -324,14 +347,14 @@ export default function App() {
               </h1>
               
              <p className="text-xl text-slate-600 max-w-2xl leading-relaxed mb-10 font-medium">
-  Software Developer & Electronics Enthusiast at MACE. Building scalable IoT systems and high-performance Flutter applications for real-world impact. Founder of <a href="https://horizonwebs.netlify.app/" target="_blank" rel="noreferrer" className="text-slate-800 font-bold underline decoration-emerald-400 underline-offset-4 hover:text-emerald-600 transition-colors">Horizon Webs</a>.
+Software Developer and Electronics Innovator at Mar Athanasius College of Engineering (EEE), designing intelligent IoT systems and high-performance Flutter applications.. Founder of <a href="https://horizonwebs.netlify.app/" target="_blank" rel="noreferrer" className="text-slate-800 font-bold underline decoration-emerald-400 underline-offset-4 hover:text-emerald-600 transition-colors">Horizon Webs</a>.
 </p>
               
               <div className="flex flex-wrap gap-4">
                 <a href="#software" className="bg-emerald-600 text-white px-8 py-3.5 rounded-full font-bold text-lg hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-200 transition-all duration-300 flex items-center gap-2">
                   View Projects <ArrowRight size={20} />
                 </a>
-                <a href="mailto:samuelmdileep@gmail.com" className="bg-transparent text-slate-800 border-2 border-slate-300 px-8 py-3.5 rounded-full font-bold text-lg hover:border-slate-800 transition-all duration-300 flex items-center gap-2">
+                <a href="#contact" className="bg-transparent text-slate-800 border-2 border-slate-300 px-8 py-3.5 rounded-full font-bold text-lg hover:border-slate-800 transition-all duration-300 flex items-center gap-2">
                   Contact Me <Mail size={20} className="text-slate-600" />
                 </a>
               </div>
@@ -448,7 +471,7 @@ export default function App() {
       </section>
 
       {/* Software Projects Section */}
-      <section id="software" className="max-w-7xl mx-auto pt-16 pb-16 px-6 relative">
+      <section id="software" className="max-w-7xl mx-auto pt-16 pb-16 px-6 relative scroll-mt-24">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">Software & Apps</h2>
           <div className="w-24 h-1.5 bg-brand-blue mx-auto rounded-full shadow-sm"></div>
@@ -457,7 +480,7 @@ export default function App() {
       </section>
 
       {/* Hardware & IoT Projects Section */}
-      <section id="hardware" className="max-w-7xl mx-auto py-16 px-6 relative bg-white rounded-[3rem] shadow-sm mb-20 border border-slate-100">
+      <section id="hardware" className="max-w-7xl mx-auto py-16 px-6 relative bg-white rounded-[3rem] shadow-sm mb-20 border border-slate-100 scroll-mt-24">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">Hardware & Embedded IoT</h2>
           <div className="w-24 h-1.5 bg-brand-green mx-auto rounded-full shadow-sm"></div>
@@ -466,8 +489,7 @@ export default function App() {
       </section>
 
       {/* Contact & Footer Section */}
-      <footer className="bg-slate-900 text-white py-20 px-6 rounded-t-[3rem] mt-10 relative overflow-hidden shadow-2xl">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-green/10 rounded-full blur-[100px] pointer-events-none"></div>
+<footer id="contact" className="bg-slate-900 text-white py-20 px-6 rounded-t-[3rem] mt-10 relative overflow-hidden shadow-2xl">        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-green/10 rounded-full blur-[100px] pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-blue/10 rounded-full blur-[100px] pointer-events-none"></div>
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -490,7 +512,17 @@ export default function App() {
           
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm font-medium">
             <p>© {new Date().getFullYear()} Samuel M Dileep. All rights reserved.</p>
-            <p>Founder of <span className="text-brand-blue font-bold">Horizon Webs</span></p>
+            <p>
+  Founder of{" "}
+  <a 
+    href="https://horizonwebs.netlify.app/" 
+    target="_blank" 
+    rel="noreferrer"
+    className="text-brand-blue font-bold hover:underline"
+  >
+    Horizon Webs
+  </a>
+</p>
           </div>
         </div>
       </footer>
