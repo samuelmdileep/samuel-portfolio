@@ -497,22 +497,27 @@ export default function App() {
           <div className="w-16 md:w-24 h-1.5 bg-brand-blue mx-auto rounded-full shadow-sm"></div>
         </div>
         
-        {/* Render only 6 projects initially */}
-        {renderCards(showAllSoftware ? softwareProjects : softwareProjects.slice(0, 6))}
+        {/* Change 6 to 3 */}
+        {renderCards(showAllSoftware ? softwareProjects : softwareProjects.slice(0, 3))}
 
         {/* Show More / Show Less Button */}
-        {softwareProjects.length > 6 && (
+        {softwareProjects.length > 3 && (
           <div className="mt-12 flex justify-center">
             <button 
-              onClick={() => setShowAllSoftware(!showAllSoftware)}
-              className="group flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-600 px-8 py-3 rounded-full font-bold hover:border-sky-400 hover:text-sky-500 transition-all shadow-sm hover:shadow-md"
-            >
-              {showAllSoftware ? (
-                <>Show Less <ChevronUp size={20} className="group-hover:-translate-y-1 transition-transform" /></>
-              ) : (
-                <>Show More <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" /></>
-              )}
-            </button>
+  onClick={() => {
+    if (showAllSoftware) {
+      document.getElementById('software').scrollIntoView({ behavior: 'smooth' });
+    }
+    setShowAllSoftware(!showAllSoftware);
+  }}
+  className="group flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-600 px-8 py-3 rounded-full font-bold hover:border-sky-400 hover:text-sky-500 transition-all shadow-sm hover:shadow-md"
+>
+  {showAllSoftware ? (
+    <>Show Less <ChevronUp size={20} className="group-hover:-translate-y-1 transition-transform" /></>
+  ) : (
+    <>Show More <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" /></>
+  )}
+</button>
           </div>
         )}
       </section>
@@ -524,22 +529,27 @@ export default function App() {
           <div className="w-16 md:w-24 h-1.5 bg-brand-green mx-auto rounded-full shadow-sm"></div>
         </div>
         
-        {/* Render only 6 projects initially */}
-        {renderCards(showAllHardware ? hardwareProjects : hardwareProjects.slice(0, 6))}
+        {/* Change 6 to 3 */}
+        {renderCards(showAllHardware ? hardwareProjects : hardwareProjects.slice(0, 3))}
 
         {/* Show More / Show Less Button */}
-        {hardwareProjects.length > 6 && (
+        {hardwareProjects.length > 3 && (
           <div className="mt-12 flex justify-center">
             <button 
-              onClick={() => setShowAllHardware(!showAllHardware)}
-              className="group flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-600 px-8 py-3 rounded-full font-bold hover:border-emerald-400 hover:text-emerald-500 transition-all shadow-sm hover:shadow-md"
-            >
-              {showAllHardware ? (
-                <>Show Less <ChevronUp size={20} className="group-hover:-translate-y-1 transition-transform" /></>
-              ) : (
-                <>Show More <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" /></>
-              )}
-            </button>
+  onClick={() => {
+    if (showAllHardware) {
+      document.getElementById('hardware').scrollIntoView({ behavior: 'smooth' });
+    }
+    setShowAllHardware(!showAllHardware);
+  }}
+  className="group flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-600 px-8 py-3 rounded-full font-bold hover:border-emerald-400 hover:text-emerald-500 transition-all shadow-sm hover:shadow-md"
+>
+  {showAllHardware ? (
+    <>Show Less <ChevronUp size={20} className="group-hover:-translate-y-1 transition-transform" /></>
+  ) : (
+    <>Show More <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" /></>
+  )}
+</button>
           </div>
         )}
       </section>
