@@ -1,16 +1,21 @@
-# React + Vite
+# Samuel M Dileep - Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 Live: https://samuelmdileep.vercel.app/
 
-Currently, two official plugins are available:
+This is my personal portfolio showcasing projects in:
+- IoT systems
+- Flutter applications
+- Web development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Featured Projects
+- EV Charging Simulator
+- Firefighting Drone
+- SkillsDoc Platform
 
-## React Compiler
+## Tech Stack
+- React
+- Tailwind CSS
+- Firebase
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## About
+This portfolio highlights my work in building scalable applications and real-world engineering solutions.
