@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
 import { 
   ExternalLink, MessageSquare, Music, Briefcase, Activity, Award, 
   BatteryCharging, Wind, Lock, Sun, Flame, Globe, Plug, Code2,
-  Zap, Mail, Share2, User, ArrowRight
+  Zap, Mail, Share2, User, ArrowRight, Menu, X
 } from 'lucide-react';
 
 // --- SOFTWARE PROJECTS ---
@@ -233,14 +234,16 @@ const hardwareProjects = [
 ];
 
 export default function App() {
+  // Mobile menu state
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const renderCards = (projectsArray) => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
       {projectsArray.map((project) => (
         <div key={project.id} className={`group border-2 rounded-3xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full ${project.cardStyle}`}>
           
-          <div className="h-56 w-full relative overflow-hidden bg-slate-100 border-b border-slate-100/50 flex items-center justify-center text-slate-400">
-            <span className="absolute z-0 text-sm font-medium tracking-widest uppercase">
+          <div className="h-48 md:h-56 w-full relative overflow-hidden bg-slate-100 border-b border-slate-100/50 flex items-center justify-center text-slate-400">
+            <span className="absolute z-0 text-sm font-medium tracking-widest uppercase text-center px-4">
               {project.title}
             </span>
             <img 
@@ -249,36 +252,35 @@ export default function App() {
               className="relative z-10 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
               onError={(e) => { e.target.style.display = 'none'; }} 
             />
-            <div className={`absolute top-4 right-4 z-20 p-3 rounded-xl shadow-lg ${project.iconStyle}`}>
+            <div className={`absolute top-4 right-4 z-20 p-2.5 md:p-3 rounded-xl shadow-lg ${project.iconStyle}`}>
               {project.icon}
             </div>
           </div>
 
-          <div className="p-8 flex flex-col flex-grow bg-white/50 backdrop-blur-sm z-10">
-            <h3 className={`text-2xl font-bold mb-3 text-slate-800 transition-colors ${project.textHover}`}>
+          <div className="p-6 md:p-8 flex flex-col flex-grow bg-white/50 backdrop-blur-sm z-10">
+            <h3 className={`text-xl md:text-2xl font-bold mb-3 text-slate-800 transition-colors ${project.textHover}`}>
               {project.title}
             </h3>
-            <p className="text-slate-600 mb-8 flex-grow leading-relaxed font-medium">
+            <p className="text-sm md:text-base text-slate-600 mb-6 flex-grow leading-relaxed font-medium">
               {project.description}
             </p>
-            <div className="flex flex-wrap gap-2 mb-8">
+            <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
               {project.tags.map(tag => (
-                <span key={tag} className="text-xs font-bold uppercase tracking-wider bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-slate-600 shadow-sm">
+                <span key={tag} className="text-[10px] md:text-xs font-bold uppercase tracking-wider bg-white border border-slate-200 px-2.5 py-1.5 rounded-lg text-slate-600 shadow-sm">
                   {tag}
                 </span>
               ))}
             </div>
             
-            {/* DYNAMIC LINKS: Only renders if liveLink or githubLink is provided in the array */}
             <div className="flex flex-wrap items-center gap-4 mt-auto pt-5 border-t-2 border-slate-100/50">
               {project.liveLink && (
                 <a 
                   href={project.liveLink} 
                   target="_blank" 
                   rel="noreferrer" 
-                  className="inline-flex items-center gap-2 text-sm font-bold text-slate-700 hover:text-brand-blue transition-colors"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 hover:text-brand-blue transition-colors"
                 >
-                  <ExternalLink size={18} /> Live Site
+                  <ExternalLink size={16} /> Live Site
                 </a>
               )}
               
@@ -287,9 +289,9 @@ export default function App() {
                   href={project.githubLink} 
                   target="_blank" 
                   rel="noreferrer" 
-                  className="inline-flex items-center gap-2 text-sm font-bold text-slate-700 hover:text-slate-900 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 hover:text-slate-900 transition-colors"
                 >
-                  <Share2 size={18} /> Source Code
+                  <Share2 size={16} /> Source Code
                 </a>
               )}
             </div>
@@ -299,19 +301,21 @@ export default function App() {
     </div>
   );
 
-return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-emerald-500 selection:text-white">
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-emerald-500 selection:text-white overflow-x-hidden">
       
-      {/* 🌟 NEW FIXED HEADER */}
-     <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-emerald-100/80 via-white/90 to-sky-100/80 backdrop-blur-md border-b border-white/50 shadow-sm transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      {/* 🌟 FIXED HEADER */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-emerald-100/90 via-white/95 to-sky-100/90 backdrop-blur-md border-b border-white/50 shadow-sm transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
+          
           {/* Logo / Title */}
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="bg-emerald-500/10 p-2 rounded-xl">
+          <div className="flex items-center gap-2 cursor-pointer relative z-50" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <div className="bg-emerald-500/10 p-1.5 md:p-2 rounded-xl">
               <Code2 size={24} className="text-emerald-500" />
             </div>
-            <span className="text-2xl font-black tracking-tighter text-emerald-500 uppercase">
-              Portfolio</span>
+            <span className="text-xl md:text-2xl font-black tracking-tighter text-emerald-500 uppercase">
+              Portfolio
+            </span>
           </div>
 
           {/* Desktop Navigation */}
@@ -322,39 +326,58 @@ return (
               Let's Talk
             </a>
           </nav>
+
+          {/* Mobile Menu Toggle Button */}
+          <button 
+            className="md:hidden p-2 text-emerald-600 relative z-50"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation Dropdown */}
+        <div className={`md:hidden absolute top-20 left-0 w-full bg-white border-b border-slate-200 shadow-xl transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
+          <nav className="flex flex-col p-6 gap-4 font-bold text-slate-600 text-center">
+            <a href="#software" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-emerald-500">Software Projects</a>
+            <a href="#hardware" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-emerald-500">Hardware & IoT</a>
+            <a href="#contact" onClick={() => setIsMenuOpen(false)} className="mt-2 bg-emerald-50 border border-emerald-200 text-emerald-600 px-5 py-3 rounded-full hover:bg-emerald-500 hover:text-white transition-all">
+              Let's Talk
+            </a>
+          </nav>
         </div>
       </header>
       
       {/* 🚀 IMAGE-MATCHED DASHBOARD HERO */}
-      <section className="max-w-7xl mx-auto px-6 pt-24 pb-12">
+      <section className="max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-12">
         
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[minmax(180px,auto)] items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 auto-rows-[minmax(180px,auto)] items-stretch">
           
           {/* 1. Main Intro Card (Left Box) */}
-          <div className="md:col-span-8 bg-white/90 backdrop-blur-sm rounded-[2rem] p-10 md:p-14 relative border border-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col justify-center">
+          <div className="lg:col-span-8 bg-white/90 backdrop-blur-sm rounded-[2rem] p-6 sm:p-10 md:p-14 relative border border-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col justify-center">
             
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 bg-white border border-slate-100 px-4 py-1.5 rounded-full mb-8 shadow-sm">
-                <span className="relative flex h-2.5 w-2.5">
+              <div className="inline-flex items-center gap-2 bg-white border border-slate-100 px-3 py-1 md:px-4 md:py-1.5 rounded-full mb-6 md:mb-8 shadow-sm">
+                <span className="relative flex h-2 w-2 md:h-2.5 md:w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 md:h-2.5 md:w-2.5 bg-emerald-500"></span>
                 </span>
-                <span className="text-xs font-bold text-slate-600 uppercase tracking-widest">Available for new projects</span>
+                <span className="text-[10px] md:text-xs font-bold text-slate-600 uppercase tracking-widest">Available for new projects</span>
               </div>
               
-              <h1 className="text-5xl md:text-7xl font-black text-slate-800 leading-tight mb-6 tracking-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-800 leading-tight mb-4 md:mb-6 tracking-tight">
                 Samuel <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-sky-500">M Dileep</span>
               </h1>
               
-             <p className="text-xl text-slate-600 max-w-2xl leading-relaxed mb-10 font-medium">
-Software Developer and Electronics Innovator at Mar Athanasius College of Engineering (EEE), designing intelligent IoT systems and high-performance Flutter applications.. Founder of <a href="https://horizonwebs.netlify.app/" target="_blank" rel="noreferrer" className="text-slate-800 font-bold underline decoration-emerald-400 underline-offset-4 hover:text-emerald-600 transition-colors">Horizon Webs</a>.
-</p>
+             <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed mb-8 md:mb-10 font-medium">
+                Software Developer and Electronics Innovator at Mar Athanasius College of Engineering (EEE), designing intelligent IoT systems and high-performance Flutter applications. Founder of <a href="https://horizonwebs.netlify.app/" target="_blank" rel="noreferrer" className="text-slate-800 font-bold underline decoration-emerald-400 underline-offset-4 hover:text-emerald-600 transition-colors">Horizon Webs</a>.
+              </p>
               
-              <div className="flex flex-wrap gap-4">
-                <a href="#software" className="bg-emerald-600 text-white px-8 py-3.5 rounded-full font-bold text-lg hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-200 transition-all duration-300 flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <a href="#software" className="bg-emerald-600 text-white px-6 md:px-8 py-3.5 rounded-full font-bold text-base md:text-lg hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-200 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto">
                   View Projects <ArrowRight size={20} />
                 </a>
-                <a href="#contact" className="bg-transparent text-slate-800 border-2 border-slate-300 px-8 py-3.5 rounded-full font-bold text-lg hover:border-slate-800 transition-all duration-300 flex items-center gap-2">
+                <a href="#contact" className="bg-transparent text-slate-800 border-2 border-slate-300 px-6 md:px-8 py-3.5 rounded-full font-bold text-base md:text-lg hover:border-slate-800 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto">
                   Contact Me <Mail size={20} className="text-slate-600" />
                 </a>
               </div>
@@ -362,7 +385,7 @@ Software Developer and Electronics Innovator at Mar Athanasius College of Engine
           </div>
 
           {/* 2. Profile Photo Card (Right Box) */}
-          <div className="md:col-span-4 rounded-[2rem] relative bg-gradient-to-br from-emerald-400 to-sky-400 p-1.5 shadow-[0_8px_30px_rgb(0,0,0,0.1)] group min-h-[350px] flex">
+          <div className="lg:col-span-4 rounded-[2rem] relative bg-gradient-to-br from-emerald-400 to-sky-400 p-1.5 shadow-[0_8px_30px_rgb(0,0,0,0.1)] group min-h-[300px] md:min-h-[350px] flex">
              <div className="relative w-full h-full rounded-[1.65rem] overflow-hidden bg-slate-200">
                <img 
                  src="photo.jpeg" 
@@ -375,24 +398,24 @@ Software Developer and Electronics Innovator at Mar Athanasius College of Engine
                   <span className="text-sm uppercase font-bold tracking-widest flex items-center gap-2"><User size={18}/> Photo</span>
                </div>
 
-               <div className="absolute bottom-5 left-5 right-5 bg-white/50 backdrop-blur-xl py-3 px-4 rounded-2xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center gap-3 transition-transform duration-500 group-hover:-translate-y-1">
+               <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 bg-white/50 backdrop-blur-xl py-2.5 px-3 md:py-3 md:px-4 rounded-2xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center gap-3 transition-transform duration-500 group-hover:-translate-y-1">
                  <div className="flex-shrink-0 bg-white p-2 rounded-full border border-sky-50 shadow-sm flex items-center justify-center">
                    <Globe size={18} className="text-sky-500" />
                  </div>
                  <div className="flex flex-col justify-center mt-0.5">
-                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] leading-none mb-1.5">Founder @</p>
-                   <p className="text-[15px] font-black text-slate-800 leading-none">Horizon Webs</p>
+                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] leading-none mb-1 md:mb-1.5">Founder @</p>
+                   <p className="text-[13px] md:text-[15px] font-black text-slate-800 leading-none">Horizon Webs</p>
                  </div>
                </div>
              </div>
           </div>
 
           {/* 3. Eventloops Experience Strip */}
-          <div className="md:col-span-7 bg-slate-900 rounded-[2rem] p-8 md:p-10 text-white relative overflow-hidden group shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col justify-center mt-2 border border-slate-800">
+          <div className="lg:col-span-7 bg-slate-900 rounded-[2rem] p-6 sm:p-8 md:p-10 text-white relative overflow-hidden group shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col justify-center lg:mt-2 border border-slate-800">
             
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:24px_24px] opacity-30"></div>
             
-            <div className="absolute -right-8 top-12 w-64 h-72 bg-slate-800/40 rounded-2xl border border-slate-700/50 shadow-2xl backdrop-blur-md transform rotate-[-6deg] group-hover:rotate-0 group-hover:-translate-y-2 transition-all duration-500 hidden sm:block">
+            <div className="absolute -right-8 top-12 w-64 h-72 bg-slate-800/40 rounded-2xl border border-slate-700/50 shadow-2xl backdrop-blur-md transform rotate-[-6deg] group-hover:rotate-0 group-hover:-translate-y-2 transition-all duration-500 hidden md:block">
               <div className="w-full h-8 border-b border-slate-700/50 flex items-center px-4 gap-1.5 bg-slate-900/50 rounded-t-2xl">
                 <div className="w-2.5 h-2.5 rounded-full bg-slate-600"></div>
                 <div className="w-2.5 h-2.5 rounded-full bg-slate-600"></div>
@@ -409,44 +432,39 @@ Software Developer and Electronics Innovator at Mar Athanasius College of Engine
             </div>
             
             <div className="relative z-10 pointer-events-none">
-              <span className="text-emerald-400 font-bold tracking-widest text-xs uppercase bg-emerald-400/10 px-3 py-1.5 rounded-full mb-4 inline-block border border-emerald-400/20 shadow-sm">
+              <span className="text-emerald-400 font-bold tracking-widest text-[10px] md:text-xs uppercase bg-emerald-400/10 px-3 py-1.5 rounded-full mb-4 inline-block border border-emerald-400/20 shadow-sm">
                 Active Role
               </span>
               <h3 className="text-2xl md:text-3xl font-bold mb-3 tracking-tight">Frontend Developer <br/>@ Eventloops</h3>
-              <p className="text-slate-400 text-base md:text-lg max-w-sm lg:max-w-md leading-relaxed">
+              <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-sm lg:max-w-md leading-relaxed">
                 Architecting the UI/UX for <span className="text-white font-semibold underline decoration-emerald-400 underline-offset-4">Eventbee</span> using Flutter, focusing on real-time performance and beautiful user interactions.
               </p>
             </div>
           </div>
 
-{/* 4. IoT & Skills Cloud Card (Unified Dark Slate Theme) */}
-          <div className="md:col-span-5 bg-slate-900 rounded-[2rem] p-8 md:p-10 text-white relative overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col justify-center mt-2 group border border-slate-800">
+          {/* 4. IoT & Skills Cloud Card */}
+          <div className="lg:col-span-5 bg-slate-900 rounded-[2rem] p-6 sm:p-8 md:p-10 text-white relative overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col justify-center lg:mt-2 group border border-slate-800">
             
-            {/* === NEW: Ambient Background Glows === */}
             <div className="absolute -top-20 -right-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none transition-opacity duration-500 group-hover:opacity-75"></div>
             <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-sky-500/10 rounded-full blur-[80px] pointer-events-none transition-opacity duration-500 group-hover:opacity-75"></div>
             
-            {/* Dark Circuit Grid */}
             <div className="absolute inset-0 opacity-40 bg-[radial-gradient(#1e293b_2px,transparent_2px)] [background-size:24px_24px] z-0"></div>
             
-            {/* Subtle Circuit Lines */}
             <div className="absolute top-0 right-12 w-px h-full bg-gradient-to-b from-transparent via-slate-700/50 to-transparent z-0"></div>
             <div className="absolute bottom-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-700/50 to-transparent z-0"></div>
             
-            {/* Subtle Status LEDs */}
-            <div className="absolute top-1/3 right-[46px] w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)] animate-pulse z-0"></div>
-            <div className="absolute bottom-[78px] right-1/4 w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse z-0" style={{ animationDelay: '0.5s' }}></div>
+            <div className="absolute top-1/3 right-[46px] w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)] animate-pulse z-0 hidden md:block"></div>
+            <div className="absolute bottom-[78px] right-1/4 w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse z-0 hidden md:block" style={{ animationDelay: '0.5s' }}></div>
             
             <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-8 text-white">
-                <div className="p-2.5 bg-slate-800 rounded-xl border border-slate-700 shadow-inner">
-                   <Zap size={20} className="text-emerald-400" />
+              <div className="flex items-center gap-3 mb-6 md:mb-8 text-white">
+                <div className="p-2 md:p-2.5 bg-slate-800 rounded-xl border border-slate-700 shadow-inner">
+                   <Zap size={18} className="text-emerald-400 md:w-5 md:h-5" />
                 </div>
-                <h4 className="font-bold uppercase tracking-[0.15em] text-sm text-slate-300">Core Arsenal</h4>
+                <h4 className="font-bold uppercase tracking-[0.15em] text-xs md:text-sm text-slate-300">Core Arsenal</h4>
               </div>
               
-              {/* Condensing the massive skill list into high-impact categories */}
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 md:gap-3">
                 {[
                   "Flutter & Dart", 
                   "IoT & ESP32", 
@@ -454,12 +472,12 @@ Software Developer and Electronics Innovator at Mar Athanasius College of Engine
                   "Embedded C",
                   "Firebase & Cloud", 
                   "PCB & Circuits",
-                  "AutoCAD & Fusion 360",
+                  "AutoCAD & Fusion",
                   "UI/UX & Figma",
-                  "Sensors & Automation",
-                  "AI & REST APIs"
+                  "Automation",
+                  "REST APIs"
                 ].map((skill) => (
-                  <span key={skill} className="bg-slate-800 border border-slate-700/50 px-4 py-2.5 rounded-xl font-bold text-sm text-slate-300 shadow-sm hover:bg-slate-800 hover:border-emerald-500/40 hover:text-white transition-all duration-300 flex items-center gap-2.5 group/pill cursor-default">
+                  <span key={skill} className="bg-slate-800 border border-slate-700/50 px-3 md:px-4 py-2 md:py-2.5 rounded-xl font-bold text-[11px] md:text-sm text-slate-300 shadow-sm hover:bg-slate-800 hover:border-emerald-500/40 hover:text-white transition-all duration-300 flex items-center gap-2 group/pill cursor-default">
                     <div className="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover/pill:bg-emerald-400 group-hover/pill:shadow-[0_0_8px_#34d399] transition-all"></div>
                     {skill}
                   </span>
@@ -471,58 +489,59 @@ Software Developer and Electronics Innovator at Mar Athanasius College of Engine
       </section>
 
       {/* Software Projects Section */}
-      <section id="software" className="max-w-7xl mx-auto pt-16 pb-16 px-6 relative scroll-mt-24">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">Software & Apps</h2>
-          <div className="w-24 h-1.5 bg-brand-blue mx-auto rounded-full shadow-sm"></div>
+      <section id="software" className="max-w-7xl mx-auto pt-10 md:pt-16 pb-16 px-4 md:px-6 relative scroll-mt-24">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">Software & Apps</h2>
+          <div className="w-16 md:w-24 h-1.5 bg-brand-blue mx-auto rounded-full shadow-sm"></div>
         </div>
         {renderCards(softwareProjects)}
       </section>
 
       {/* Hardware & IoT Projects Section */}
-      <section id="hardware" className="max-w-7xl mx-auto py-16 px-6 relative bg-white rounded-[3rem] shadow-sm mb-20 border border-slate-100 scroll-mt-24">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">Hardware & Embedded IoT</h2>
-          <div className="w-24 h-1.5 bg-brand-green mx-auto rounded-full shadow-sm"></div>
+      <section id="hardware" className="max-w-7xl mx-auto py-10 md:py-16 px-4 md:px-6 relative bg-white rounded-[2rem] md:rounded-[3rem] shadow-sm mb-12 md:mb-20 border border-slate-100 scroll-mt-24">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">Hardware & Embedded IoT</h2>
+          <div className="w-16 md:w-24 h-1.5 bg-brand-green mx-auto rounded-full shadow-sm"></div>
         </div>
         {renderCards(hardwareProjects)}
       </section>
 
       {/* Contact & Footer Section */}
-<footer id="contact" className="bg-slate-900 text-white py-20 px-6 rounded-t-[3rem] mt-10 relative overflow-hidden shadow-2xl">        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-green/10 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-blue/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <footer id="contact" className="bg-slate-900 text-white py-16 md:py-20 px-4 md:px-6 rounded-t-[2rem] md:rounded-t-[3rem] mt-10 relative overflow-hidden shadow-2xl">
+        <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-brand-green/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-64 md:w-96 h-64 md:h-96 bg-brand-blue/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight">Let's Build Something Great.</h2>
-          <p className="text-slate-400 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 md:mb-6 tracking-tight">Let's Build Something Great.</h2>
+          <p className="text-slate-400 text-base md:text-lg mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed px-4">
             Whether you need a scalable Flutter application, a custom hardware prototype, or a complete digital solution from Horizon Webs, I'm always open to discussing new projects.
           </p>
           
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-20">
-            <a href="mailto:samuelmdileep@gmail.com" className="flex items-center gap-2 bg-brand-green hover:bg-green-500 text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 hover:shadow-lg hover:shadow-green-500/25 w-full sm:w-auto justify-center">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 md:gap-4 mb-16 md:mb-20">
+            <a href="mailto:samuelmdileep@gmail.com" className="flex items-center gap-2 bg-brand-green hover:bg-green-500 text-white px-8 py-3.5 md:py-4 rounded-full font-bold transition-all hover:scale-105 hover:shadow-lg hover:shadow-green-500/25 w-full sm:w-auto justify-center">
               <Mail size={20} /> Get in Touch
             </a>
-            <a href="https://github.com/samuelmdileep" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-full font-bold transition-all w-full sm:w-auto justify-center backdrop-blur-sm border border-white/10 hover:border-white/20">
+            <a href="https://github.com/samuelmdileep" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-8 py-3.5 md:py-4 rounded-full font-bold transition-all w-full sm:w-auto justify-center backdrop-blur-sm border border-white/10 hover:border-white/20">
               <Share2 size={20} /> GitHub
             </a>
-            <a href="https://www.linkedin.com/in/samuel-m-dileep-b84960314/" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-full font-bold transition-all w-full sm:w-auto justify-center backdrop-blur-sm border border-white/10 hover:border-white/20">
+            <a href="https://www.linkedin.com/in/samuel-m-dileep-b84960314/" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-8 py-3.5 md:py-4 rounded-full font-bold transition-all w-full sm:w-auto justify-center backdrop-blur-sm border border-white/10 hover:border-white/20">
               <User size={20} /> LinkedIn
             </a>
           </div>
           
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm font-medium">
+          <div className="border-t border-white/10 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs md:text-sm font-medium">
             <p>© {new Date().getFullYear()} Samuel M Dileep. All rights reserved.</p>
             <p>
-  Founder of{" "}
-  <a 
-    href="https://horizonwebs.netlify.app/" 
-    target="_blank" 
-    rel="noreferrer"
-    className="text-brand-blue font-bold hover:underline"
-  >
-    Horizon Webs
-  </a>
-</p>
+              Founder of{" "}
+              <a 
+                href="https://horizonwebs.netlify.app/" 
+                target="_blank" 
+                rel="noreferrer"
+                className="text-brand-blue font-bold hover:underline"
+              >
+                Horizon Webs
+              </a>
+            </p>
           </div>
         </div>
       </footer>
