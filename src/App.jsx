@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   ExternalLink, MessageSquare, Music, Briefcase, Activity, Award, 
   BatteryCharging, Wind, Lock, Sun, Flame, Globe, Plug, Code2,
-  Zap, Mail, Share2, User, ArrowRight, Menu, X
+  Zap, Mail, Share2, User, ArrowRight, Menu, X, ChevronDown, ChevronUp
 } from 'lucide-react';
 
 // --- SOFTWARE PROJECTS ---
@@ -234,8 +234,10 @@ const hardwareProjects = [
 ];
 
 export default function App() {
-  // Mobile menu state
+  // Navigation & Toggle States
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showAllSoftware, setShowAllSoftware] = useState(false);
+  const [showAllHardware, setShowAllHardware] = useState(false);
   
   const renderCards = (projectsArray) => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
@@ -494,7 +496,25 @@ export default function App() {
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">Software & Apps</h2>
           <div className="w-16 md:w-24 h-1.5 bg-brand-blue mx-auto rounded-full shadow-sm"></div>
         </div>
-        {renderCards(softwareProjects)}
+        
+        {/* Render only 6 projects initially */}
+        {renderCards(showAllSoftware ? softwareProjects : softwareProjects.slice(0, 6))}
+
+        {/* Show More / Show Less Button */}
+        {softwareProjects.length > 6 && (
+          <div className="mt-12 flex justify-center">
+            <button 
+              onClick={() => setShowAllSoftware(!showAllSoftware)}
+              className="group flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-600 px-8 py-3 rounded-full font-bold hover:border-sky-400 hover:text-sky-500 transition-all shadow-sm hover:shadow-md"
+            >
+              {showAllSoftware ? (
+                <>Show Less <ChevronUp size={20} className="group-hover:-translate-y-1 transition-transform" /></>
+              ) : (
+                <>Show More <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" /></>
+              )}
+            </button>
+          </div>
+        )}
       </section>
 
       {/* Hardware & IoT Projects Section */}
@@ -503,7 +523,25 @@ export default function App() {
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">Hardware & Embedded IoT</h2>
           <div className="w-16 md:w-24 h-1.5 bg-brand-green mx-auto rounded-full shadow-sm"></div>
         </div>
-        {renderCards(hardwareProjects)}
+        
+        {/* Render only 6 projects initially */}
+        {renderCards(showAllHardware ? hardwareProjects : hardwareProjects.slice(0, 6))}
+
+        {/* Show More / Show Less Button */}
+        {hardwareProjects.length > 6 && (
+          <div className="mt-12 flex justify-center">
+            <button 
+              onClick={() => setShowAllHardware(!showAllHardware)}
+              className="group flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-600 px-8 py-3 rounded-full font-bold hover:border-emerald-400 hover:text-emerald-500 transition-all shadow-sm hover:shadow-md"
+            >
+              {showAllHardware ? (
+                <>Show Less <ChevronUp size={20} className="group-hover:-translate-y-1 transition-transform" /></>
+              ) : (
+                <>Show More <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" /></>
+              )}
+            </button>
+          </div>
+        )}
       </section>
 
       {/* Contact & Footer Section */}
