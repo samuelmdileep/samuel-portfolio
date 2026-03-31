@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { 
   ExternalLink, MessageSquare, Music, Briefcase, Activity, Award, 
   BatteryCharging, Wind, Lock, Sun, Flame, Globe, Plug, Code2,
-  Zap, Mail, Share2, User, ArrowRight, Menu, X, ChevronDown, ChevronUp
+  Zap, Mail, Share2, User, ArrowRight, Menu, X, ChevronDown, ChevronUp,
+  FileText   // ✅ ADD THIS
 } from 'lucide-react';
 
-// --- SOFTWARE PROJECTS ---
-const softwareProjects = [
+// --- SOFTWARE APPS & SITES ---
+const softwareApps = [
   {
     id: 1,
     title: "Pager Chat App",
@@ -45,31 +46,6 @@ const softwareProjects = [
     liveLink: "https://horizonwebs.netlify.app/"
   },
   {
-    id: 3,
-    title: "AI Resume Generator",
-    description: "AI-powered resume generation platform with structured templates, Firebase data collection, and multi-template rendering.",
-    tags: ["Firebase", "AI", "Web"],
-    icon: <Code2 size={24} />,
-    image: "ai.png", 
-    cardStyle: "bg-gradient-to-br from-slate-50 to-white border-slate-300 shadow-slate-200 hover:shadow-slate-300/80",
-    iconStyle: "text-slate-600 bg-white",
-    textHover: "group-hover:text-slate-700",
-    githubLink: "https://github.com/samuelmdileep/resume-ai",
-  },
-  {
-    id: 4,
-    title: "SkillsDoc Platform",
-    description: "A skill documentation platform with Firebase Auth, cloud storage integration, and scalable architecture for resume exports.",
-    tags: ["Firebase", "Web Tech"],
-    icon: <Briefcase size={24} />,
-    image: "skill.png", 
-    cardStyle: "bg-gradient-to-br from-sky-50 to-white border-sky-300 shadow-slate-200 hover:shadow-sky-300/60",
-    iconStyle: "text-brand-blue bg-white",
-    textHover: "group-hover:text-brand-blue",
-    githubLink: "https://github.com/samuelmdileep/SkillsDoc",
-    liveLink: "https://samuelmdileep.github.io/SkillsDoc/dashboard.html"
-  },
-  {
     id: 5,
     title: "Smart Med Scan",
     description: "A HorizonWebs health-tech solution for scanning and managing medical records with structured data storage.",
@@ -80,17 +56,6 @@ const softwareProjects = [
     iconStyle: "text-brand-green bg-white",
     textHover: "group-hover:text-brand-green",
     liveLink: "https://samuelmdileep.github.io/smart-med-scan/"
-  },
-  {
-    id: 6,
-    title: "Certificator",
-    description: "A HorizonWebs platform that automates certificate creation and management for events, colleges, and organizations.",
-    tags: ["Automation", "Web Tech"],
-    icon: <Award size={24} />,
-    image: "certificator.png", 
-    cardStyle: "bg-gradient-to-br from-slate-50 to-white border-slate-300 shadow-slate-200 hover:shadow-slate-300/80",
-    iconStyle: "text-slate-600 bg-white",
-    textHover: "group-hover:text-slate-700",
   },
   {
     id: 101,
@@ -127,7 +92,61 @@ const softwareProjects = [
     cardStyle: "bg-gradient-to-br from-sky-50 to-white border-sky-300 shadow-slate-200 hover:shadow-sky-300/60",
     iconStyle: "text-brand-blue bg-white",
     textHover: "group-hover:text-brand-blue",
-  }
+  },
+    {
+    id: 4,
+    title: "SkillsDoc Platform",
+    description: "A skill documentation platform with Firebase Auth, cloud storage integration, and scalable architecture for resume exports.",
+    tags: ["Firebase", "Web Tech"],
+    icon: <Briefcase size={24} />,
+    image: "skill.png", 
+    cardStyle: "bg-gradient-to-br from-sky-50 to-white border-sky-300 shadow-slate-200 hover:shadow-sky-300/60",
+    iconStyle: "text-brand-blue bg-white",
+    textHover: "group-hover:text-brand-blue",
+    githubLink: "https://github.com/samuelmdileep/SkillsDoc",
+    liveLink: "https://samuelmdileep.github.io/SkillsDoc/dashboard.html"
+  },
+];
+
+// --- SOFTWARE TOOLS ---
+const softwareTools = [
+  {
+    id: 3,
+    title: "AI Resume Generator",
+    description: "AI-powered resume generation platform with structured templates, Firebase data collection, and multi-template rendering.",
+    tags: ["Firebase", "AI", "Web"],
+    icon: <Code2 size={24} />,
+    image: "ai.png", 
+    cardStyle: "bg-gradient-to-br from-slate-50 to-white border-slate-300 shadow-slate-200 hover:shadow-slate-300/80",
+    iconStyle: "text-slate-600 bg-white",
+    textHover: "group-hover:text-slate-700",
+    githubLink: "https://github.com/samuelmdileep/resume-ai",
+  },
+
+  {
+    id: 6,
+    title: "Certificator",
+    description: "A HorizonWebs platform that automates certificate creation and management for events, colleges, and organizations.",
+    tags: ["Automation", "Web Tech"],
+    icon: <Award size={24} />,
+    image: "certificator.png", 
+    cardStyle: "bg-gradient-to-br from-slate-50 to-white border-slate-300 shadow-slate-200 hover:shadow-slate-300/80",
+    iconStyle: "text-slate-600 bg-white",
+    textHover: "group-hover:text-slate-700",
+  },
+  {
+  id: 7,
+  title: "PDF Designer",
+  description: "A browser-based PDF editing tool with header, footer, watermark, border, and page number customization using client-side processing.",
+  tags: ["Web Tech", "JavaScript"],
+  icon: <FileText size={24} />,
+  image: "pdf-designer.png",
+  cardStyle: "bg-gradient-to-br from-slate-50 to-white border-slate-300 shadow-slate-200 hover:shadow-slate-300/80",
+  iconStyle: "text-slate-600 bg-white",
+  textHover: "group-hover:text-slate-700",
+  githubLink: "https://github.com/samuelmdileep/PDF-Designer",
+  liveLink: "https://pdf-designer-sam.vercel.app/"
+}
 ];
 
 // --- HARDWARE & IOT PROJECTS ---
@@ -237,6 +256,7 @@ export default function App() {
   // Navigation & Toggle States
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showAllSoftware, setShowAllSoftware] = useState(false);
+  const [showAllTools, setShowAllTools] = useState(false);
   const [showAllHardware, setShowAllHardware] = useState(false);
   
   const renderCards = (projectsArray) => (
@@ -322,8 +342,9 @@ export default function App() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8 font-bold text-sm text-slate-600">
-            <a href="#software" className="hover:text-emerald-500 transition-colors">Software</a>
-            <a href="#hardware" className="hover:text-emerald-500 transition-colors">Hardware & IoT</a>
+            <a href="#software" className="hover:text-emerald-500 transition-colors">Apps</a>
+            <a href="#tools" className="hover:text-emerald-500 transition-colors">Tools</a>
+            <a href="#hardware" className="hover:text-emerald-500 transition-colors">Hardware</a>
             <a href="#contact" className="bg-emerald-50 border border-emerald-200 text-emerald-600 px-5 py-2.5 rounded-full hover:bg-emerald-500 hover:text-white transition-all shadow-sm">
               Let's Talk
             </a>
@@ -341,7 +362,8 @@ export default function App() {
         {/* Mobile Navigation Dropdown */}
         <div className={`md:hidden absolute top-20 left-0 w-full bg-white border-b border-slate-200 shadow-xl transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
           <nav className="flex flex-col p-6 gap-4 font-bold text-slate-600 text-center">
-            <a href="#software" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-emerald-500">Software Projects</a>
+            <a href="#software" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-emerald-500">Software Apps</a>
+            <a href="#tools" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-emerald-500">Software Tools</a>
             <a href="#hardware" onClick={() => setIsMenuOpen(false)} className="py-2 hover:text-emerald-500">Hardware & IoT</a>
             <a href="#contact" onClick={() => setIsMenuOpen(false)} className="mt-2 bg-emerald-50 border border-emerald-200 text-emerald-600 px-5 py-3 rounded-full hover:bg-emerald-500 hover:text-white transition-all">
               Let's Talk
@@ -352,7 +374,6 @@ export default function App() {
       
       {/* 🚀 IMAGE-MATCHED DASHBOARD HERO */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-12">
-        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 auto-rows-[minmax(180px,auto)] items-stretch">
           
           {/* 1. Main Intro Card (Left Box) */}
@@ -414,7 +435,6 @@ export default function App() {
 
           {/* 3. Eventloops Experience Strip */}
           <div className="lg:col-span-7 bg-slate-900 rounded-[2rem] p-6 sm:p-8 md:p-10 text-white relative overflow-hidden group shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col justify-center lg:mt-2 border border-slate-800">
-            
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:24px_24px] opacity-30"></div>
             
             <div className="absolute -right-8 top-12 w-64 h-72 bg-slate-800/40 rounded-2xl border border-slate-700/50 shadow-2xl backdrop-blur-md transform rotate-[-6deg] group-hover:rotate-0 group-hover:-translate-y-2 transition-all duration-500 hidden md:block">
@@ -446,12 +466,10 @@ export default function App() {
 
           {/* 4. IoT & Skills Cloud Card */}
           <div className="lg:col-span-5 bg-slate-900 rounded-[2rem] p-6 sm:p-8 md:p-10 text-white relative overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col justify-center lg:mt-2 group border border-slate-800">
-            
             <div className="absolute -top-20 -right-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none transition-opacity duration-500 group-hover:opacity-75"></div>
             <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-sky-500/10 rounded-full blur-[80px] pointer-events-none transition-opacity duration-500 group-hover:opacity-75"></div>
             
             <div className="absolute inset-0 opacity-40 bg-[radial-gradient(#1e293b_2px,transparent_2px)] [background-size:24px_24px] z-0"></div>
-            
             <div className="absolute top-0 right-12 w-px h-full bg-gradient-to-b from-transparent via-slate-700/50 to-transparent z-0"></div>
             <div className="absolute bottom-20 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-700/50 to-transparent z-0"></div>
             
@@ -468,16 +486,9 @@ export default function App() {
               
               <div className="flex flex-wrap gap-2 md:gap-3">
                 {[
-                  "Flutter & Dart", 
-                  "IoT & ESP32", 
-                  "React & Tailwind", 
-                  "Embedded C",
-                  "Firebase & Cloud", 
-                  "PCB & Circuits",
-                  "AutoCAD & Fusion",
-                  "UI/UX & Figma",
-                  "Automation",
-                  "REST APIs"
+                  "Flutter & Dart", "IoT & ESP32", "React & Tailwind", "Embedded C",
+                  "Firebase & Cloud", "PCB & Circuits", "AutoCAD & Fusion", "UI/UX & Figma",
+                  "Automation", "REST APIs"
                 ].map((skill) => (
                   <span key={skill} className="bg-slate-800 border border-slate-700/50 px-3 md:px-4 py-2 md:py-2.5 rounded-xl font-bold text-[11px] md:text-sm text-slate-300 shadow-sm hover:bg-slate-800 hover:border-emerald-500/40 hover:text-white transition-all duration-300 flex items-center gap-2 group/pill cursor-default">
                     <div className="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover/pill:bg-emerald-400 group-hover/pill:shadow-[0_0_8px_#34d399] transition-all"></div>
@@ -490,34 +501,62 @@ export default function App() {
         </div>
       </section>
 
-      {/* Software Projects Section */}
+      {/* Software Apps Section */}
       <section id="software" className="max-w-7xl mx-auto pt-10 md:pt-16 pb-16 px-4 md:px-6 relative scroll-mt-24">
         <div className="text-center mb-10 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">Software & Apps</h2>
           <div className="w-16 md:w-24 h-1.5 bg-brand-blue mx-auto rounded-full shadow-sm"></div>
         </div>
         
-        {/* Change 6 to 3 */}
-        {renderCards(showAllSoftware ? softwareProjects : softwareProjects.slice(0, 3))}
+        {renderCards(showAllSoftware ? softwareApps : softwareApps.slice(0, 3))}
 
-        {/* Show More / Show Less Button */}
-        {softwareProjects.length > 3 && (
+        {softwareApps.length > 3 && (
           <div className="mt-12 flex justify-center">
             <button 
-  onClick={() => {
-    if (showAllSoftware) {
-      document.getElementById('software').scrollIntoView({ behavior: 'smooth' });
-    }
-    setShowAllSoftware(!showAllSoftware);
-  }}
-  className="group flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-600 px-8 py-3 rounded-full font-bold hover:border-sky-400 hover:text-sky-500 transition-all shadow-sm hover:shadow-md"
->
-  {showAllSoftware ? (
-    <>Show Less <ChevronUp size={20} className="group-hover:-translate-y-1 transition-transform" /></>
-  ) : (
-    <>Show More <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" /></>
-  )}
-</button>
+              onClick={() => {
+                if (showAllSoftware) {
+                  document.getElementById('software').scrollIntoView({ behavior: 'smooth' });
+                }
+                setShowAllSoftware(!showAllSoftware);
+              }}
+              className="group flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-600 px-8 py-3 rounded-full font-bold hover:border-sky-400 hover:text-sky-500 transition-all shadow-sm hover:shadow-md"
+            >
+              {showAllSoftware ? (
+                <>Show Less <ChevronUp size={20} className="group-hover:-translate-y-1 transition-transform" /></>
+              ) : (
+                <>Show More <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" /></>
+              )}
+            </button>
+          </div>
+        )}
+      </section>
+
+      {/* Software Tools Section */}
+      <section id="tools" className="max-w-7xl mx-auto pt-10 md:pt-16 pb-16 px-4 md:px-6 relative scroll-mt-24">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">Software Tools & Platforms</h2>
+          <div className="w-16 md:w-24 h-1.5 bg-slate-400 mx-auto rounded-full shadow-sm"></div>
+        </div>
+        
+        {renderCards(showAllTools ? softwareTools : softwareTools.slice(0, 3))}
+
+        {softwareTools.length > 3 && (
+          <div className="mt-12 flex justify-center">
+            <button 
+              onClick={() => {
+                if (showAllTools) {
+                  document.getElementById('tools').scrollIntoView({ behavior: 'smooth' });
+                }
+                setShowAllTools(!showAllTools);
+              }}
+              className="group flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-600 px-8 py-3 rounded-full font-bold hover:border-slate-500 hover:text-slate-600 transition-all shadow-sm hover:shadow-md"
+            >
+              {showAllTools ? (
+                <>Show Less <ChevronUp size={20} className="group-hover:-translate-y-1 transition-transform" /></>
+              ) : (
+                <>Show More <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" /></>
+              )}
+            </button>
           </div>
         )}
       </section>
@@ -529,27 +568,25 @@ export default function App() {
           <div className="w-16 md:w-24 h-1.5 bg-brand-green mx-auto rounded-full shadow-sm"></div>
         </div>
         
-        {/* Change 6 to 3 */}
         {renderCards(showAllHardware ? hardwareProjects : hardwareProjects.slice(0, 3))}
 
-        {/* Show More / Show Less Button */}
         {hardwareProjects.length > 3 && (
           <div className="mt-12 flex justify-center">
             <button 
-  onClick={() => {
-    if (showAllHardware) {
-      document.getElementById('hardware').scrollIntoView({ behavior: 'smooth' });
-    }
-    setShowAllHardware(!showAllHardware);
-  }}
-  className="group flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-600 px-8 py-3 rounded-full font-bold hover:border-emerald-400 hover:text-emerald-500 transition-all shadow-sm hover:shadow-md"
->
-  {showAllHardware ? (
-    <>Show Less <ChevronUp size={20} className="group-hover:-translate-y-1 transition-transform" /></>
-  ) : (
-    <>Show More <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" /></>
-  )}
-</button>
+              onClick={() => {
+                if (showAllHardware) {
+                  document.getElementById('hardware').scrollIntoView({ behavior: 'smooth' });
+                }
+                setShowAllHardware(!showAllHardware);
+              }}
+              className="group flex items-center gap-2 bg-white border-2 border-slate-200 text-slate-600 px-8 py-3 rounded-full font-bold hover:border-emerald-400 hover:text-emerald-500 transition-all shadow-sm hover:shadow-md"
+            >
+              {showAllHardware ? (
+                <>Show Less <ChevronUp size={20} className="group-hover:-translate-y-1 transition-transform" /></>
+              ) : (
+                <>Show More <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" /></>
+              )}
+            </button>
           </div>
         )}
       </section>
